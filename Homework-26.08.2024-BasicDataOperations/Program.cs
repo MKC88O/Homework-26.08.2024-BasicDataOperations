@@ -23,6 +23,7 @@ namespace Homework_26._08._2024_BasicDataOperations
             {
                 //    db.Database.EnsureDeleted();
                 //    db.Database.EnsureCreated();
+
                 Train train = new Train
                 {
                     TrainNumber = "123A",
@@ -32,18 +33,27 @@ namespace Homework_26._08._2024_BasicDataOperations
                     ArrivalTime = DateTime.Now.AddHours(5)
                 };
 
+                train = db.GetTrain(1);
+                if (train != null)
+                {
+                    Console.WriteLine("Train: " + train.TrainNumber + " " + train.DepartureStation + " - " + train.ArrivalStation);
+                }
+                else
+                {
+                    Console.WriteLine("Train not found");
+                }
 
                 //db.AddTrain(train);
 
 
                 //db.DeleteTrain(4);
 
-                train = db.Trains.FirstOrDefault(t => t.Id == 3);
-                if (train != null)
-                {
-                    train.TrainNumber = "1234A";
-                    db.UpdateTrain(train);
-                }
+                //train = db.Trains.FirstOrDefault(t => t.Id == 3);
+                //if (train != null)
+                //{
+                //    train.TrainNumber = "1234A";
+                //    db.UpdateTrain(train);
+                //}
             }
         }
     }
@@ -67,6 +77,11 @@ namespace Homework_26._08._2024_BasicDataOperations
         {
         }
         public DbSet<Train> Trains { get; set; }
+
+        public Train GetTrain(int id)
+        {
+            return Trains.FirstOrDefault(t => t.Id == id);
+        }
 
         public void AddTrain(Train train)
         {
