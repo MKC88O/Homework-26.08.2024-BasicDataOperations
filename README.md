@@ -1,0 +1,1 @@
+# Homework-26.08.2024-BasicDataOperations
